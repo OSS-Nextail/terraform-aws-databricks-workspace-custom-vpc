@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  check_secrets:
+    description: |
+      Analyze the repository for secrets
+    docker:
+      - image: zricethezav/gitleaks:v8.12.0
+    steps:
+      - checkout
+      - run:
+          name: Check for secrets
+          command: |
+            gitleaks detect --no-git --verbose --redact
+
+workflows:
+  version: 2.1
+  
+  check_for_secrets:
+    jobs:
+      - check_secrets
