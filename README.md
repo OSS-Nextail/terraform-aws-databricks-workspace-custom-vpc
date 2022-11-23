@@ -9,14 +9,14 @@ Nextail Terraform module for creating a Databricks workspace in AWS within an ex
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.2 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.37.0 |
-| <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) | >= 0.5.7 |
+| <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) | >= 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.37.0 |
-| <a name="provider_databricks"></a> [databricks](#provider\_databricks) | >= 0.5.7 |
+| <a name="provider_databricks"></a> [databricks](#provider\_databricks) | >= 1.0.0 |
 | <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Modules
