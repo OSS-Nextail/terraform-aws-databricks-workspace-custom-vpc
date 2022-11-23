@@ -1,7 +1,7 @@
 # terraform-aws-databricks-workspace-custom-vpc
 
 Nextail Terraform module for creating a Databricks workspace in AWS within an existing VPC
-
+ 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
