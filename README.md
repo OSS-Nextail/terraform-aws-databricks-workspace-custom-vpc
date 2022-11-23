@@ -20,9 +20,9 @@ Nextail Terraform module for creating a Databricks workspace in AWS within an ex
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
-| <a name="provider_databricks"></a> [databricks](#provider\_databricks) | 1.0.0 |
-| <a name="provider_time"></a> [time](#provider\_time) | 0.8.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.37.0 |
+| <a name="provider_databricks"></a> [databricks](#provider\_databricks) | >= 1.0.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Modules
 
@@ -49,15 +49,15 @@ Nextail Terraform module for creating a Databricks workspace in AWS within an ex
 | [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_subnet.databricks_nat_subnets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
 | [aws_subnet.databricks_subnets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
-| [databricks_mws_credentials.this](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/resources/mws_credentials) | resource |
-| [databricks_mws_networks.this](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/resources/mws_networks) | resource |
-| [databricks_mws_storage_configurations.this](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/resources/mws_storage_configurations) | resource |
-| [databricks_mws_workspaces.this](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/resources/mws_workspaces) | resource |
+| [databricks_mws_credentials.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_credentials) | resource |
+| [databricks_mws_networks.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_networks) | resource |
+| [databricks_mws_storage_configurations.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_storage_configurations) | resource |
+| [databricks_mws_workspaces.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces) | resource |
 | [time_sleep.wait](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [aws_internet_gateway.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/internet_gateway) | data source |
-| [databricks_aws_assume_role_policy.assume_cross_acount_role](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/data-sources/aws_assume_role_policy) | data source |
-| [databricks_aws_bucket_policy.root_storage_bucket](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/data-sources/aws_bucket_policy) | data source |
-| [databricks_aws_crossaccount_policy.this](https://registry.terraform.io/providers/databricks/databricks/1.0.0/docs/data-sources/aws_crossaccount_policy) | data source |
+| [databricks_aws_assume_role_policy.assume_cross_acount_role](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/aws_assume_role_policy) | data source |
+| [databricks_aws_bucket_policy.root_storage_bucket](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/aws_bucket_policy) | data source |
+| [databricks_aws_crossaccount_policy.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/aws_crossaccount_policy) | data source |
 
 ## Inputs
 
