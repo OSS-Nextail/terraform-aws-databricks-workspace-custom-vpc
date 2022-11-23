@@ -2,6 +2,11 @@
 
 Nextail Terraform module for creating a Databricks workspace in AWS within an existing VPC
 
+## Releasing a new version
+
+1. Run `make update-docs` and commit updated README
+2. Tag the commit with the proper version
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
