@@ -5,7 +5,7 @@ jobs:
     description: |
       Analyze the repository for secrets
     docker:
-      - image: zricethezav/gitleaks:v8.12.0
+      - image: zricethezav/gitleaks:v8.15.1
     steps:
       - checkout
       - run:
