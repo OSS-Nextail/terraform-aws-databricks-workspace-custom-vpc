@@ -14,8 +14,7 @@ jobs:
             gitleaks detect --no-git --verbose --redact
 
 workflows:
-  version: 2.1
-  
+
   check_for_secrets:
     jobs:
       - check_secrets
