@@ -8,10 +8,8 @@ variable "resource_prefix" {
   }
 }
 
-variable "workspace_environment_names" {
-  description = <<EOF
-(optional) Databricks workspaces environment(s) name(s), to use with the deployment and workspace names. Will deploy as many workspaces as given environment names
-  EOF
+variable "workspaces" {
+  description = "Databricks workspaces name(s), to use with the deployment (optional) and workspace names. Will deploy as many workspaces as given names"  
   type        = list(string)
 
   validation {
@@ -20,6 +18,15 @@ variable "workspace_environment_names" {
     ])
     error_message = "The workspace_environment_names list must contain at least one non-empty string."
   }
+}
+
+variable "add_deployment_name" {
+  description = <<EOF
+  Whether to add the workspace name as a deployment name. Capability of adding deployment name must be provided by Databricks: 
+  https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces#deployment_name
+  EOF
+  type = bool
+  default = true
 }
 
 variable "root_bucket_name" {
