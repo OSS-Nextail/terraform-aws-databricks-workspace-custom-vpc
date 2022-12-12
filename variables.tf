@@ -8,18 +8,17 @@ variable "resource_prefix" {
   }
 }
 
-variable "deployment_name" {
+variable "workspace_environment_names" {
   description = <<EOF
-(optional) Databricks deployment name for the workspace, if any, as explained in
-https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces#deployment_name
+(optional) Databricks workspaces environment(s) name(s), to use with the deployment and workspace names. Will deploy as many workspaces as given environment names
   EOF
-  type        = string
-  nullable    = true
-  default     = null
+  type        = list(string)
 
   validation {
-    condition     = var.deployment_name == null ? true : trimspace(var.deployment_name) != ""
-    error_message = "The deployment_name value must be either null or a non-empty string."
+    condition     = length(var.workspace_environment_names) > 0 && alltrue([
+      for dp in var.workspace_environment_names : dp != ""
+    ])
+    error_message = "The workspace_environment_names list must contain at least one non-empty string."
   }
 }
 
