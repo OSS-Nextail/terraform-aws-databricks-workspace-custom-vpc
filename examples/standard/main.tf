@@ -1,7 +1,7 @@
 locals {
   resource_prefix = "databricks-example"
 
-  workspace_environment_names = ["dev", "preprod"]
+  workspace_names = ["dev", "preprod"]
 
   databricks_root_bucket_name = "databricks-example-root-bucket"
 
@@ -47,7 +47,7 @@ module "databricks_workspace_example" {
   }
 
   resource_prefix             = local.resource_prefix
-  workspace_environment_names = local.workspace_environment_names
+  workspaces                  = local.workspace_names
   root_bucket_name            = local.databricks_root_bucket_name
   databricks_account_id       = var.databricks_account_id
   aws_region                  = data.aws_region.current.name

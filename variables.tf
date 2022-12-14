@@ -9,14 +9,18 @@ variable "resource_prefix" {
 }
 
 variable "workspaces" {
-  description = "Databricks workspaces name(s), to use with the deployment (optional) and workspace names. Will deploy as many workspaces as given names"  
+  description = <<EOF
+  Databricks workspace name(s). Will deploy one workspace per key, and will set each name as workspace name - and optionally as deployment name, if add_deployment_name is true. 
+  NOTE: all workspaces will share the same Databricks configurations for credentials, networks and storage, i.e. they will share crossacount role, subnets, S3 buckets, etc. 
+  If this is not the intended result, call the module several times instead
+  EOF
   type        = list(string)
 
   validation {
-    condition     = length(var.workspace_environment_names) > 0 && alltrue([
-      for dp in var.workspace_environment_names : dp != ""
+    condition     = length(var.workspaces) > 0 && alltrue([
+      for workspace_name in var.workspaces : workspace_name != ""
     ])
-    error_message = "The workspace_environment_names list must contain at least one non-empty string."
+    error_message = "The workspaces list must contain at least one non-empty string."
   }
 }
 

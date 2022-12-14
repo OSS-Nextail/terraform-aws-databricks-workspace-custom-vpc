@@ -11,9 +11,9 @@ resource "databricks_mws_workspaces" "these" {
   workspace_name  = each.key
   deployment_name = local.add_deployment_name ? each.key : null
 
-  credentials_id           = databricks_mws_credentials.these.credentials_id
-  storage_configuration_id = databricks_mws_storage_configurations.these.storage_configuration_id
-  network_id               = databricks_mws_networks.these.network_id
+  credentials_id           = databricks_mws_credentials.this.credentials_id
+  storage_configuration_id = databricks_mws_storage_configurations.this.storage_configuration_id
+  network_id               = databricks_mws_networks.this.network_id
 
   token {
     comment = "Terraform"
