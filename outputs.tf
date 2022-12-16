@@ -1,11 +1,11 @@
 output "databricks_host" {
   description = "Databricks workspace URL"
-  value       = databricks_mws_workspaces.this.workspace_url
+  value       = {for k, workspace in databricks_mws_workspaces.these: k => workspace.workspace_url}
 }
 
 output "databricks_token" {
   description = "Databricks workspace token. Can be used to create resources in the workspace in the same Terraform state."
-  value       = databricks_mws_workspaces.this.token[0].token_value
+  value       = {for k, workspace in databricks_mws_workspaces.these: k => workspace.token[0].token_value}
   sensitive   = true
 }
 
