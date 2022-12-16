@@ -82,7 +82,7 @@ Nextail Terraform module for creating a Databricks workspace in AWS within an ex
 | Name | Description |
 |------|-------------|
 | <a name="output_cross_account_role_name"></a> [cross\_account\_role\_name](#output\_cross\_account\_role\_name) | Name of the cross-account IAM role created for the Databricks workspace |
-| <a name="output_databricks_host"></a> [databricks\_host](#output\_databricks\_host) | Databricks workspace URL |
-| <a name="output_databricks_token"></a> [databricks\_token](#output\_databricks\_token) | Databricks workspace token. Can be used to create resources in the workspace in the same Terraform state. |
+| <a name="output_databricks_hosts"></a> [databricks\_hosts](#output\_databricks\_hosts) | Databricks workspace URLs for the given created workspaces. |
+| <a name="output_databricks_tokens"></a> [databricks\_tokens](#output\_databricks\_tokens) | Databricks workspace tokens for the given created workspaces. Can be used to create resources in the workspace in the same Terraform state. |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | ID of the security group created for the Databricks workspace |
 <!-- END_TF_DOCS -->
