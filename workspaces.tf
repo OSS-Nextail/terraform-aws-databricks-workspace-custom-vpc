@@ -3,7 +3,7 @@ resource "databricks_mws_workspaces" "these" {
   
   account_id      = var.databricks_account_id
   aws_region      = var.aws_region
-  workspace_name  = each.key
+  workspace_name  = "databricks-${each.key}"
   deployment_name = var.add_deployment_name ? each.key : null
 
   credentials_id           = databricks_mws_credentials.this.credentials_id
