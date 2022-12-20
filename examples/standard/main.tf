@@ -1,6 +1,8 @@
 locals {
   resource_prefix = "databricks-example"
 
+  workspace_names = ["dev", "preprod"]
+
   databricks_root_bucket_name = "databricks-example-root-bucket"
 
   default_tags = {
@@ -45,6 +47,7 @@ module "databricks_workspace_example" {
   }
 
   resource_prefix             = local.resource_prefix
+  workspaces                  = local.workspace_names
   root_bucket_name            = local.databricks_root_bucket_name
   databricks_account_id       = var.databricks_account_id
   aws_region                  = data.aws_region.current.name
