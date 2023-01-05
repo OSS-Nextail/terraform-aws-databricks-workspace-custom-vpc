@@ -7,7 +7,7 @@ resource "databricks_mws_workspaces" "these" {
   deployment_name = var.add_deployment_name ? each.key : null
 
   credentials_id           = databricks_mws_credentials.this.credentials_id
-  storage_configuration_id = databricks_mws_storage_configurations.this.storage_configuration_id
+  storage_configuration_id = databricks_mws_storage_configurations.these[each.key].storage_configuration_id
   network_id               = databricks_mws_networks.this.network_id
 
   token {

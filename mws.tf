@@ -5,9 +5,11 @@ resource "databricks_mws_credentials" "this" {
   depends_on       = [time_sleep.wait]
 }
 
-resource "databricks_mws_networks" "this" {
+resource "databricks_mws_networks" "these" {
+  for_each           = toset(var.workspaces)
+  
   account_id         = var.databricks_account_id
-  network_name       = "${var.resource_prefix}-network"
+  network_name       = "${each.key}-network"
   security_group_ids = [aws_security_group.this.id]
   subnet_ids         = [for k, v in aws_subnet.databricks_subnets : v.id]
   vpc_id             = var.vpc_id
