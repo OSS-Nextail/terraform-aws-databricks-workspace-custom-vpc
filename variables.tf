@@ -8,19 +8,15 @@ variable "resource_prefix" {
   }
 }
 
-variable "workspaces" {
+variable "workspace" {
   description = <<EOF
-  Databricks workspace name(s). Will deploy one workspace per key, and will set each name as workspace name - and optionally as deployment name, if add_deployment_name is true. 
-  NOTE: all workspaces will share the same Databricks configurations for credentials, networks and storage, i.e. they will share crossacount role, subnets, S3 buckets, etc. 
-  If this is not the intended result, call the module several times instead
+  Databricks workspace name. Optionally will be used as deployment name, if add_deployment_name is true. 
   EOF
-  type        = list(string)
+  type        = string
 
   validation {
-    condition     = length(var.workspaces) > 0 && alltrue([
-      for workspace_name in var.workspaces : workspace_name != ""
-    ])
-    error_message = "The workspaces list must contain at least one non-empty string."
+    condition     = length(var.workspace) > 2
+    error_message = "The workspace name length must be, at least, 3 characters long."
   }
 }
 
@@ -29,8 +25,8 @@ variable "add_deployment_name" {
   Whether to add the workspace name as a deployment name. Capability of adding deployment name must be provided by Databricks: 
   https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces#deployment_name
   EOF
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "root_bucket_name" {
