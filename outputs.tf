@@ -4,7 +4,7 @@ output "databricks_host" {
 }
 
 output "databricks_token" {
-  description = "Databricks workspace tokensfor the given created workspace. Can be used to create resources in the workspace in the same Terraform state."
+  description = "Databricks workspace tokens for the given created workspace. Can be used to create resources in the workspace in the same Terraform state."
   value       = databricks_mws_workspaces.this.token[0].token_value
   sensitive   = true
 }
