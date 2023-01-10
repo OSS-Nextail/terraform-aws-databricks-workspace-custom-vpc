@@ -1,7 +1,7 @@
 resource "databricks_mws_credentials" "this" {
   account_id       = var.databricks_account_id
   role_arn         = aws_iam_role.cross_account_role.arn
-  credentials_name = "${var.resource_prefix}-creds"
+  credentials_name = "${var.resource_prefix}-${var.workspace}-creds"
   depends_on       = [time_sleep.wait]
 }
 
@@ -17,7 +17,7 @@ resource "databricks_mws_networks" "this" {
 resource "databricks_mws_storage_configurations" "this" {
   account_id                 = var.databricks_account_id
   bucket_name                = var.create_root_bucket ? aws_s3_bucket.root_storage_bucket[0].bucket : var.root_bucket_name
-  storage_configuration_name = "${var.resource_prefix}-storage"
+  storage_configuration_name = "${var.resource_prefix}-${var.workspace}-storage"
 }
 
 resource "time_sleep" "wait" {

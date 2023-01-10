@@ -13,7 +13,7 @@ locals {
       service_type    = "Gateway"
       route_table_ids = [for k, v in aws_route_table.databricks_main_route_tables : v.id]
       tags = merge(var.default_tags, {
-        Name = "${var.resource_prefix}-s3-vpc-endpoint"
+        Name = "${var.resource_prefix}-${var.workspace}-s3-vpc-endpoint"
       })
     }
 
@@ -22,7 +22,7 @@ locals {
       private_dns_enabled = true
       subnet_ids          = [for k, v in aws_subnet.databricks_subnets : v.id]
       tags = merge(var.default_tags, {
-        Name = "${var.resource_prefix}-kinesis-vpc-endpoint"
+        Name = "${var.resource_prefix}-${var.workspace}-kinesis-vpc-endpoint"
       })
     }
 
@@ -31,7 +31,7 @@ locals {
       private_dns_enabled = true
       subnet_ids          = [for k, v in aws_subnet.databricks_subnets : v.id]
       tags = merge(var.default_tags, {
-        Name = "${var.resource_prefix}-sts-vpc-endpoint"
+        Name = "${var.resource_prefix}-${var.workspace}-sts-vpc-endpoint"
       })
     }
   }
@@ -45,7 +45,7 @@ data "aws_internet_gateway" "default" {
 }
 
 resource "aws_security_group" "this" {
-  name        = var.resource_prefix
+  name        = "${var.resource_prefix}-${var.workspace}"
   description = "Security group for Databricks"
   vpc_id      = var.vpc_id
 
@@ -91,7 +91,7 @@ resource "aws_subnet" "databricks_subnets" {
   availability_zone = each.value.availability_zone
 
   tags = merge(var.default_tags, {
-    Name = "${var.resource_prefix}-main-subnet-${each.value.availability_zone}"
+    Name = "${var.resource_prefix}-${var.workspace}-main-subnet-${each.value.availability_zone}"
   })
 }
 
@@ -103,7 +103,7 @@ resource "aws_subnet" "databricks_nat_subnets" {
   availability_zone = each.value.availability_zone
 
   tags = merge(var.default_tags, {
-    Name = "${var.resource_prefix}-NAT-gateway-subnet-${each.value.availability_zone}"
+    Name = "${var.resource_prefix}-${var.workspace}-NAT-gateway-subnet-${each.value.availability_zone}"
   })
 }
 
@@ -113,7 +113,7 @@ resource "aws_eip" "databricks_nat_gateways_eips" {
   vpc = true
 
   tags = merge(var.default_tags, {
-    Name = "${var.resource_prefix}-NAT-gateway-EIP-${each.value.availability_zone}"
+    Name = "${var.resource_prefix}-${var.workspace}-NAT-gateway-EIP-${each.value.availability_zone}"
   })
 }
 
@@ -125,7 +125,7 @@ resource "aws_nat_gateway" "databricks_nat_gateways" {
   connectivity_type = "public"
 
   tags = merge(var.default_tags, {
-    Name = "${var.resource_prefix}-NAT-gateway-${each.value.availability_zone}"
+    Name = "${var.resource_prefix}-${var.workspace}-NAT-gateway-${each.value.availability_zone}"
   })
 }
 
@@ -140,7 +140,7 @@ resource "aws_route_table" "databricks_main_route_tables" {
   }
 
   tags = merge(var.default_tags, {
-    Name = "${var.resource_prefix}-main-route-table-${each.value.availability_zone}"
+    Name = "${var.resource_prefix}-${var.workspace}-main-route-table-${each.value.availability_zone}"
   })
 }
 
@@ -155,7 +155,7 @@ resource "aws_route_table" "databricks_nat_route_tables" {
   }
 
   tags = merge(var.default_tags, {
-    Name = "${var.resource_prefix}-nat-route-table-${each.value.availability_zone}"
+    Name = "${var.resource_prefix}-${var.workspace}-nat-route-table-${each.value.availability_zone}"
   })
 }
 
