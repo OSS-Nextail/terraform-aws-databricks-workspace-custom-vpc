@@ -52,7 +52,7 @@ Nextail Terraform module for creating a Databricks workspace in AWS within an ex
 | [databricks_mws_credentials.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_credentials) | resource |
 | [databricks_mws_networks.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_networks) | resource |
 | [databricks_mws_storage_configurations.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_storage_configurations) | resource |
-| [databricks_mws_workspaces.these](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces) | resource |
+| [databricks_mws_workspaces.this](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces) | resource |
 | [time_sleep.wait](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [aws_internet_gateway.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/internet_gateway) | data source |
 | [databricks_aws_assume_role_policy.assume_cross_acount_role](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/aws_assume_role_policy) | data source |
@@ -75,14 +75,14 @@ Nextail Terraform module for creating a Databricks workspace in AWS within an ex
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | List of subnet definitions per Availability Zone.<br>Each one will create two subnets:<br>- Databricks Compute Resources subnet: each compute resource takes two IPs, so a good range of IPs would be from 512 to 4096, depending on specific needs<br>- NAT Gateway: each NAT subnet takes just one IP, so a /24 CIDR is more than enough<br>A minimum of two list items in different Availability Zones are required<br>Note: Internet access is required for Databricks clusters to work. Every NAT Gateway will require an available EIP and a default Internet Gateway in the VPC. | <pre>list(object({<br>    main_subnet_cidr_block = string<br>    nat_subnet_cidr_block  = string<br>    availability_zone      = string<br>  }))</pre> | n/a | yes |
 | <a name="input_vpc_endpoints"></a> [vpc\_endpoints](#input\_vpc\_endpoints) | (Optional) List of VPC endpoints to create. The valid values are 's3', 'kinesis-streams' and 'sts'.<br>If not specified, no VPC endpoints will be created. It is recommended to create all where possible.<br>More info: https://docs.databricks.com/administration-guide/cloud-configurations/aws/customer-managed-vpc.html#regional-endpoints-1 | `map(bool)` | <pre>{<br>  "kinesis-streams": false,<br>  "s3": false,<br>  "sts": false<br>}</pre> | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the VPC in which to provision the workspace. The VPC must have a valid Internet Gateway | `string` | n/a | yes |
-| <a name="input_workspaces"></a> [workspaces](#input\_workspaces) | Databricks workspace name(s). Will deploy one workspace per key, and will set each name as workspace name - and optionally as deployment name, if add\_deployment\_name is true. <br>  NOTE: all workspaces will share the same Databricks configurations for credentials, networks and storage, i.e. they will share crossacount role, subnets, S3 buckets, etc. <br>  If this is not the intended result, call the module several times instead | `list(string)` | n/a | yes |
+| <a name="input_workspace"></a> [workspace](#input\_workspace) | Databricks workspace name. Optionally will be used as deployment name, if add\_deployment\_name is true. | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_cross_account_role_name"></a> [cross\_account\_role\_name](#output\_cross\_account\_role\_name) | Name of the cross-account IAM role created for the Databricks workspace |
-| <a name="output_databricks_hosts"></a> [databricks\_hosts](#output\_databricks\_hosts) | Databricks workspace URLs for the given created workspaces. |
-| <a name="output_databricks_tokens"></a> [databricks\_tokens](#output\_databricks\_tokens) | Databricks workspace tokens for the given created workspaces. Can be used to create resources in the workspace in the same Terraform state. |
+| <a name="output_databricks_host"></a> [databricks\_host](#output\_databricks\_host) | Databricks workspace URL for the given created workspace. |
+| <a name="output_databricks_token"></a> [databricks\_token](#output\_databricks\_token) | Databricks workspace tokens for the given created workspace. Can be used to create resources in the workspace in the same Terraform state. |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | ID of the security group created for the Databricks workspace |
 <!-- END_TF_DOCS -->
