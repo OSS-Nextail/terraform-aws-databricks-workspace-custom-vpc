@@ -109,7 +109,6 @@ variable "security_groups_to_allow_egress_to" {
   }
 }
 
-
 variable "security_group_egress_ports" {
   description = <<EOF
 (Optional) List of custom ports to allow TCP egress access to 0.0.0.0/0 outside security group.
@@ -141,4 +140,10 @@ EOF
     condition     = length(setsubtract(keys(var.vpc_endpoints), ["s3", "sts", "kinesis-streams"])) == 0
     error_message = "The vpc_endpoints valid values are s3, sts and kinesis-streams."
   }
+}
+
+variable "token_lifetime_seconds" {
+  description = "(Optional) Token expiry lifetime. By default it is 2592000 (30 days)."
+  type = number
+  default = 2592000
 }

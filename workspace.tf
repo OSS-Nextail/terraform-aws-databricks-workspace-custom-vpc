@@ -11,5 +11,6 @@ resource "databricks_mws_workspaces" "this" {
 
   token {
     comment = "Terraform"
+    lifetime_seconds = var.token_lifetime_seconds
   }
 }
