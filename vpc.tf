@@ -110,7 +110,7 @@ resource "aws_subnet" "databricks_nat_subnets" {
 resource "aws_eip" "databricks_nat_gateways_eips" {
   for_each = local.subnets_map
 
-  vpc = true
+  domain = "vpc"
 
   tags = merge(var.default_tags, {
     Name = "${var.resource_prefix}-${var.workspace}-NAT-gateway-EIP-${each.value.availability_zone}"
