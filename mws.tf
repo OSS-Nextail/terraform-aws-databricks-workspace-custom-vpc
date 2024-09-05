@@ -1,5 +1,4 @@
 resource "databricks_mws_credentials" "this" {
-  account_id       = var.databricks_account_id
   role_arn         = aws_iam_role.cross_account_role.arn
   credentials_name = "${var.resource_prefix}-${var.workspace}-creds"
   depends_on       = [time_sleep.wait]
