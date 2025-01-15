@@ -1,6 +1,6 @@
 locals {
   default_sg_egress_ports = [443, 3306, 6666]
-  sg_egress_ports         = toset(concat(local.default_sg_egress_ports, var.security_group_egress_ports))
+  sg_egress_ports         = toset(concat(local.default_sg_egress_ports, var.external_security_group_egress_ports))
   sg_ingress_protocol     = ["tcp", "udp"]
   sg_egress_protocol      = ["tcp", "udp"]
   # [{subnet1}, {subnet2}, ...] -> {0: {subnet1}, 1: {subnet2}, ...}
@@ -59,6 +59,16 @@ resource "aws_security_group" "this" {
     }
   }
 
+  dynamic "ingress" { // Allow ingress from external SGs: 2200 (SSH to cluster)
+    for_each = var.external_security_groups_to_allow_ingress_from
+    content {
+      from_port         = 2200
+      to_port           = 2200
+      protocol          = "tcp"
+      security_groups   = [ingress.value]
+    }
+  }
+
   dynamic "egress" {
     for_each = local.sg_egress_protocol
     content {
@@ -66,7 +76,7 @@ resource "aws_security_group" "this" {
       to_port         = 65535
       protocol        = egress.value
       self            = true
-      security_groups = var.security_groups_to_allow_egress_to
+      security_groups = var.internal_security_groups_to_allow_egress_to
     }
   }
 
