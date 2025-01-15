@@ -97,6 +97,16 @@ EOF
   }))
 }
 
+variable "external_security_groups_to_allow_ingress_from" {
+  description = <<EOF
+(Optional) List of security group IDs to allow ingress from outside the VPC for the recommended Databricks ports:
+- 2200 (SSH)
+EOF
+  type        = list(string)
+  nullable    = true
+  default     = null
+}
+
 variable "internal_security_groups_to_allow_egress_to" {
   description = "(Optional) List of security group IDs to allow egress to within the VPC"
   type        = list(string)
@@ -107,16 +117,6 @@ variable "internal_security_groups_to_allow_egress_to" {
     condition     = var.internal_security_groups_to_allow_egress_to == null ? true : alltrue([for sg in var.internal_security_groups_to_allow_egress_to : length(trimspace(sg)) > 0])
     error_message = "The internal_security_groups_to_allow_egress_to values must contain non-empty string only."
   }
-}
-
-variable "external_security_groups_to_allow_ingress_from" {
-  description = <<EOF
-(Optional) List of security group IDs to allow ingress from outside the VPC for the recommended Databricks ports:
-- 2200 (SSH)
-EOF
-  type        = list(string)
-  nullable    = true
-  default     = null
 }
 
 variable "external_security_group_egress_ports" {
