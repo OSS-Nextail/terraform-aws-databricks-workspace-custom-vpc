@@ -97,19 +97,19 @@ EOF
   }))
 }
 
-variable "security_groups_to_allow_egress_to" {
+variable "internal_security_groups_to_allow_egress_to" {
   description = "(Optional) List of security group IDs to allow egress to within the VPC"
   type        = list(string)
   nullable    = true
   default     = null
 
   validation {
-    condition     = var.security_groups_to_allow_egress_to == null ? true : [for sg in var.security_groups_to_allow_egress_to : sg if length(trimspace(sg)) == 0] == []
-    error_message = "The security_groups_to_allow_egress_to values must contain non-empty string only."
+    condition     = var.internal_security_groups_to_allow_egress_to == null ? true : alltrue([for sg in var.internal_security_groups_to_allow_egress_to : length(trimspace(sg)) > 0])
+    error_message = "The internal_security_groups_to_allow_egress_to values must contain non-empty string only."
   }
 }
 
-variable "security_group_egress_ports" {
+variable "external_security_group_egress_ports" {
   description = <<EOF
 (Optional) List of custom ports to allow TCP egress access to 0.0.0.0/0 outside security group.
 No need to specify ports 443, 3306 and 6666 as they will be open by default, as recommended by Databricks
@@ -118,8 +118,8 @@ EOF
   default     = []
 
   validation {
-    condition     = length(var.security_group_egress_ports) == 0 ? true : min(var.security_group_egress_ports...) > 0 && max(var.security_group_egress_ports...) <= 65535
-    error_message = "The security_group_egress_ports values must be in the range (1, 65535)."
+    condition     = length(var.external_security_group_egress_ports) == 0 ? true : min(var.external_security_group_egress_ports...) > 0 && max(var.external_security_group_egress_ports...) <= 65535
+    error_message = "The external_security_group_egress_ports values must be in the range (1, 65535)."
   }
 }
 
