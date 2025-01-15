@@ -109,6 +109,16 @@ variable "internal_security_groups_to_allow_egress_to" {
   }
 }
 
+variable "external_security_groups_to_allow_ingress_from" {
+  description = <<EOF
+(Optional) List of security group IDs to allow ingress from outside the VPC for the recommended Databricks ports:
+- 2200 (SSH)
+EOF
+  type        = list(string)
+  nullable    = true
+  default     = null
+}
+
 variable "external_security_group_egress_ports" {
   description = <<EOF
 (Optional) List of custom ports to allow TCP egress access to 0.0.0.0/0 outside security group.

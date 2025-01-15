@@ -59,6 +59,16 @@ resource "aws_security_group" "this" {
     }
   }
 
+  dynamic "ingress" { // Allow ingress from external SGs: 2200 (SSH to cluster)
+    for_each = var.external_security_groups_to_allow_ingress_from
+    content {
+      from_port         = 2200
+      to_port           = 2200
+      protocol          = "tcp"
+      security_groups   = [ingress.value]
+    }
+  }
+
   dynamic "egress" {
     for_each = local.sg_egress_protocol
     content {
