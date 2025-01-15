@@ -103,15 +103,15 @@ variable "external_security_groups_to_allow_ingress_from" {
 - 2200 (SSH)
 EOF
   type        = list(string)
-  nullable    = true
-  default     = null
+  nullable    = false
+  default     = []
 }
 
 variable "internal_security_groups_to_allow_egress_to" {
   description = "(Optional) List of security group IDs to allow egress to within the VPC"
   type        = list(string)
-  nullable    = true
-  default     = null
+  nullable    = false
+  default     = []
 
   validation {
     condition     = var.internal_security_groups_to_allow_egress_to == null ? true : alltrue([for sg in var.internal_security_groups_to_allow_egress_to : length(trimspace(sg)) > 0])
@@ -125,6 +125,7 @@ variable "external_security_group_egress_ports" {
 No need to specify ports 443, 3306 and 6666 as they will be open by default, as recommended by Databricks
 EOF
   type        = list(number)
+  nullable    = false
   default     = []
 
   validation {
