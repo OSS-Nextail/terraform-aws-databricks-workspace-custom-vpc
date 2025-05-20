@@ -3,12 +3,6 @@ output "databricks_host" {
   value       = databricks_mws_workspaces.this.workspace_url
 }
 
-output "databricks_token" {
-  description = "Databricks workspace tokens. Usage is now between limited and unusable. Can't be used to create resources in the workspace when Unity Catalog is not enabled. If UC is enabled, the recommended way is to create a Service Principal and a secret, assign it to the workspace and use it instead."
-  value       = databricks_mws_workspaces.this.token[0].token_value
-  sensitive   = true
-}
-
 output "security_group_id" {
   description = "ID of the security group created for the Databricks workspace"
   value       = aws_security_group.this.id
