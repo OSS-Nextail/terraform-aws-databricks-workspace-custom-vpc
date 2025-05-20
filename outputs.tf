@@ -4,7 +4,7 @@ output "databricks_host" {
 }
 
 output "databricks_token" {
-  description = "Databricks workspace tokens for the given created workspace. Can be used to create resources in the workspace in the same Terraform state."
+  description = "Databricks workspace tokens. Usage is now between limited and unusable. Can't be used to create resources in the workspace when Unity Catalog is not enabled. If UC is enabled, the recommended way is to create a Service Principal and a secret, assign it to the workspace and use it instead."
   value       = databricks_mws_workspaces.this.token[0].token_value
   sensitive   = true
 }

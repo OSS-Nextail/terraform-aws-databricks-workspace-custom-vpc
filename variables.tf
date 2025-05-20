@@ -154,7 +154,7 @@ EOF
 }
 
 variable "token_lifetime_seconds" {
-  description = "(Optional) Token expiry lifetime. By default it is 2592000 (30 days)."
+  description = "(Optional) Generated token expiry lifetime. By default it is 2592000 (30 days). NOTE: this token won't be valid for workspace management in Databricks accounts without Unity Catalog enabled."
   type = number
   default = 2592000
 }
